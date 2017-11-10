@@ -132,7 +132,7 @@ limitations under the License.
           <version>2.4</version>
        </plugin>
        <plugin>
-        <groupId>net.alchim31.maven</groupId>
+        <groupId>com.triplequote.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
         <version>${scala-maven-plugin-version}</version>
         <executions>
@@ -153,6 +153,9 @@ limitations under the License.
           </execution>
         </executions>
         <configuration>
+          <hydraEnabled>true</hydraEnabled>
+          <hydraVersion>0.9.8</hydraVersion>
+          <hydraCpus>4</hydraCpus>
           <scalaCompatVersion>${scala-binary-version}</scalaCompatVersion>
           <args>
             <!-- require java8, cf http://www.rudder-project.org/redmine/issues/9917 -->
@@ -322,7 +325,8 @@ limitations under the License.
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Maven plugin version -->
-    <scala-maven-plugin-version>3.2.2</scala-maven-plugin-version>
+    <!-- <scala-maven-plugin-version>3.2.2</scala-maven-plugin-version> -->
+    <scala-maven-plugin-version>3.2.2-hydra02</scala-maven-plugin-version>
 
     <!-- Libraries version that MUST be used in all children project -->
 
@@ -483,7 +487,12 @@ limitations under the License.
         <artifactId>logback-classic</artifactId>
         <version>${logback-version}</version>
       </dependency>
-
+      <dependency>
+        <groupId>org.specs2</groupId>
+        <artifactId>specs2-core_${scala-binary-version}</artifactId>
+        <version>${specs2-version}</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -554,8 +563,6 @@ limitations under the License.
     <dependency>
       <groupId>org.specs2</groupId>
       <artifactId>specs2-core_${scala-binary-version}</artifactId>
-      <version>${specs2-version}</version>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.specs2</groupId>
